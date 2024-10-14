@@ -1,27 +1,23 @@
-Catawiki Web Scraper
-Overview
+# Catawiki Web Scraper
+## Overview
 
-The Catawiki Web Scraper is a powerful Node.js-based tool designed to scrape auction data from the popular auction platform, Catawiki. The web scraper uses Puppeteer for browser automation, making it ideal for collecting auction listings, detailed item descriptions, prices, dates, and other relevant data.
+The Catawiki Web Scraper is a powerful Node.js-based tool designed to scrape auction data from the popular auction platform, Catawiki. The scraper uses Puppeteer for browser automation, making it ideal for collecting auction listings, detailed item descriptions, prices, dates, and other relevant data.
 
-This project allows users to extract auction data from Catawiki into structured JSON format. This data can be used for various purposes, such as market research, analytics, or developing auction-based services and insights.
+This tool allows users to extract auction data into structured JSON format, which can be used for market research, analytics, or to develop auction-based insights and services.
 Features
 
     Headless Scraping: Uses Puppeteer in headless mode for efficient scraping.
-    Extract Auction Listings: Collects information from multiple auctions, including titles, descriptions, dates, and prices.
-    Filter and Sort Data: Data is stored in JSON format, allowing easy filtering and sorting using other tools or scripts.
-    Automated Browsing: The scraper mimics user interactions to load dynamic content (e.g., pagination and lazy-loaded items).
-    Customizable: Set custom parameters to target specific auction categories or listing pages.
+    Auction Data Extraction: Scrapes auction titles, descriptions, prices, dates, and URLs.
+    JSON Output: Stores data in JSON format for easy filtering and analysis.
+    Customizable: Set custom parameters to scrape specific auction categories or listings.
+    Automated Pagination: Handles multiple pages automatically.
 
+## Prerequisites
 
-    Prerequisites
-
-Before running the project, ensure that you have the following installed:
+Before running the project, ensure you have the following installed:
 
     Node.js (v14.0 or higher)
     npm (v6.0 or higher)
-
-You’ll also need to install the required dependencies using npm.
-
 
 Installing Dependencies
 
@@ -32,7 +28,7 @@ Installing Dependencies
 git clone https://github.com/MarkoRrokaj/Catawiki_Webscraper.git
 cd Catawiki_Webscraper
 
-Install the dependencies:
+Install the necessary dependencies:
 
 bash
 
@@ -40,44 +36,34 @@ npm install
 
 Install Puppeteer:
 
-Puppeteer is a Node.js library that provides a high-level API for controlling Chrome or Chromium over the DevTools Protocol.
-
 bash
 
     npm install puppeteer
 
-Configuration
+## Configuration
 
-    Open the config.js file located in the src/ directory to configure the scraper according to your needs. You can set options such as:
-        Start URL: The page from where the scraper will begin.
-        Pagination: Enable or disable pagination to scrape multiple pages of auction listings.
-        Headless Mode: Enable or disable headless mode (set to true for silent scraping).
-        Timeouts and Delays: Adjust the time delays between page loads to avoid rate-limiting or blocking by the website.
+To configure the scraper:
 
-    If required, you can set environment variables in the .env file for API keys or specific settings.
+    Open the config.js file located in the src/ directory.
+    Customize the following options based on your requirements:
+        Start URL: The page where the scraper will begin scraping.
+        Pagination: Enable or disable pagination to scrape multiple pages of listings.
+        Headless Mode: Enable or disable headless mode for the browser.
+        Timeouts: Adjust delays between requests to avoid rate-limiting or blocking.
 
+If needed, set environment variables in the .env file (e.g., for API keys).
 Running the Web Scraper
 
-To start the scraping process, simply run:
+To run the scraper, execute the following command:
 
 bash
 
 node src/scraper.js
 
-The scraper will launch a headless browser (or a visible browser if configured) and navigate through the auction pages, collecting relevant data.
-Output
-
-The scraped data will be stored in the data/ directory as a .json file. Each auction listing will be saved with details such as:
-
-    Auction title
-    Item description
-    Price (if available)
-    Auction end date
-    URL of the listing
-
+The scraper will launch a browser (in headless or visible mode, based on configuration) and start collecting auction data. The scraped data will be saved in the data/ directory in JSON format.
 Sample Output
 
-A typical output format will look like this:
+The output JSON format will look like this:
 
 json
 
@@ -98,34 +84,20 @@ json
   }
 ]
 
-Customization
+## Customization
 
-The web scraper can be easily customized for specific use cases:
+    Additional Fields: Modify scraper.js to scrape additional data fields by adjusting the DOM selectors.
+    Specific Categories: Adjust the startURL in config.js to scrape data from specific auction categories (e.g., "Art," "Jewelry").
+    Error Handling: The scraper includes basic error handling. You can extend it to handle edge cases like CAPTCHAs or timeouts.
 
-    Scraping Additional Data: If you need to scrape additional fields, modify the DOM selectors in scraper.js to target other HTML elements on the auction page.
-    Targeting Specific Categories: Modify the startURL in the configuration to scrape data from a particular auction category (e.g., "Art," "Jewelry," "Antiques").
-    Error Handling: The scraper comes with basic error handling. You can extend this by adding retry logic or handling edge cases, such as CAPTCHAs.
+## Known Issues and Limitations
 
-Known Issues and Limitations
+    CAPTCHA Handling: The scraper cannot bypass CAPTCHAs.
+    Rate Limiting: To avoid rate-limiting or being blocked, adjust the delay settings in config.js.
+    Dynamic Content: Some pages load content dynamically, which Puppeteer handles, though performance may vary.
 
-    CAPTCHA Handling: If Catawiki detects too many requests, you might encounter CAPTCHAs. The current version does not bypass CAPTCHAs.
-    Rate Limiting: To avoid being blocked, adjust timeouts and delays in the configuration file.
-    Dynamic Content: Some pages may load content dynamically (e.g., after scrolling). This is handled by Puppeteer, but performance may vary.
+## Future Enhancements
 
-Future Enhancements
-
-Some potential future improvements for the Catawiki Web Scraper include:
-
-    CAPTCHA Bypassing: Implement a CAPTCHA-solving service.
-    Data Export: Add functionality to export scraped data in CSV or Excel format.
-    Advanced Filtering: Include options to filter listings by price range, auction end date, etc., before scraping.
-
-Contribution Guidelines
-
-If you would like to contribute to this project, please feel free to submit issues or pull requests. Contributions are welcome, and any feedback will be greatly appreciated.
-
-    Fork the repository.
-    Create your feature branch (git checkout -b feature-branch).
-    Commit your changes (git commit -m 'Add some feature').
-    Push to the branch (git push origin feature-branch).
-    Open a pull request.
+    CAPTCHA Bypassing: Implement CAPTCHA-solving capabilities.
+    Data Export: Add options to export data in CSV or Excel formats.
+    Advanced Filtering: Enable filtering by price range, auction end date, or category prior to scraping.
